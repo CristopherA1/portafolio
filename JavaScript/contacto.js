@@ -1,3 +1,37 @@
+let txtNombre = document.getElementById("txtNombre");
+let txtEmail = document.getElementById("txtEmail");
+let txtPhone = document.getElementById("txtPhone");
+let asunto = document.getElementById("asunto");
+let btnEnviar = document.getElementById("btnEnviar");
+let txtMensaje = document.getElementById("txtMensaje");
+let listAsunto = document.getElementById("listAsunto");
+let checkrecibirInfo = document.getElementById("checkrecibirInfo");
+let checkPoliticasPriv = document.getElementById("checkPoliticasPriv");
+
+let formContacto = document.getElementById("formContacto");
+
+
+/* ALERTAS */
+
+// Párrafos de las alertas
+let alertNombre = document.getElementById("alertNombre");
+let alertEmail = document.getElementById("alertEmail");
+let alertPhone = document.getElementById("alertPhone");
+let alertMensaje = document.getElementById("alertMensaje");
+let alertCheckPriv = document.getElementById("alertCheckPriv");
+
+
+//Div de la alerta
+let alertValidacionesTextoNombre = document.getElementById("alertValidacionesTextoNombre");
+let alertValidacionesTextoEmail = document.getElementById("alertValidacionesTextoEmail");
+let alertValidacionesTextoPhone = document.getElementById("alertValidacionesTextoPhone");
+let alertValidacionesTextoMensaje = document.getElementById("alertValidacionesTextoMensaje");
+let alertValidacionesListAsunto = document.getElementById("alertValidacionesListAsunto");
+let alertValidacionesCheckPriv = document.getElementById("alertValidacionesCheckPriv");
+
+//Bandera para evitar repetir la alerta de cada campo
+let index = [];
+
 // Validación para que el campo nombre solo permita nombres de longitud (3 - 99) caracteres.
 function validarNombre(nombre) {
     if (nombre.length >= 3 && nombre.length < 100) {
@@ -100,15 +134,6 @@ function validarNombre(nombre) {
   
     }
   
-    if (!validarListAsunto(listAsunto.value)) {
-      if (!index.includes("listAsunto")) {
-        alertValidacionesListAsunto.insertAdjacentHTML("afterbegin", `Selecciona un <strong> Asunto </strong> por favor. <br/> `);
-        alertValidacionesListAsunto.style.color = "red";
-        listAsunto.style.border = "solid thin red";
-        index.push("listAsunto");
-      }
-  
-    }
   
     if (!validarMensaje(txtMensaje.value)) {
       if (!index.includes("mensaje")) {
@@ -122,3 +147,27 @@ function validarNombre(nombre) {
     limpiarTodo();
   }
 );
+//Remueve todas las instancias de un objeto dado (item) que se encuentre en el arreglo index
+function removeAllInstances(arr, item) {
+    for (var i = arr.length; i--;) {
+      if (arr[i] === item) arr.splice(i, 1);
+    }
+  }
+  
+  function limpiarTodo() {
+    index = [];
+    checkrecibirInfo.checked = false;
+    checkPoliticasPriv.checked = false;
+    txtNombre.value = "";
+    txtEmail.value = "";
+    txtPhone.value = "";
+    txtMensaje.value = "";
+    listAsunto.value = "Asunto";
+    removeAllInstances(index, "nombre");
+    removeAllInstances(index, "email");
+    removeAllInstances(index, "phone");
+    removeAllInstances(index, "mensaje");
+    removeAllInstances(index, "listAsunto");
+    removeAllInstances(index, "checkPriv");
+  }
+  
